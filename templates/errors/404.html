@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}404 — Page Not Found · Stanley Wachanga{% endblock %}
+{% block content %}
+<section class="sw-error-page">
+  <div class="sw-error-code">404</div>
+  <h1 class="sw-error-title">Page not found</h1>
+  <p class="sw-error-sub">This page doesn't exist or was moved.</p>
+  <a href="{% url 'home' %}" class="sw-btn sw-btn-primary">Back home</a>
+</section>
+{% endblock %}

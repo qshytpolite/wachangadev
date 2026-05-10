@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: stanley-wachanga-portfolio
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: "stanley-wachanga-portfolio.onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://stanley-wachanga-portfolio.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: portfolio-db
+          property: connectionString
+      # Email — set manually after deploy
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+      # Cloudinary — optional, leave blank to use local storage
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+databases:
+  - name: portfolio-db
+    plan: free
+    databaseName: portfolio
+    user: portfolio

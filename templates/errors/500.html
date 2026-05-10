@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}500 — Server Error · Stanley Wachanga{% endblock %}
+{% block content %}
+<section class="sw-error-page">
+  <div class="sw-error-code">500</div>
+  <h1 class="sw-error-title">Something went wrong</h1>
+  <p class="sw-error-sub">A server error occurred. Try again in a moment.</p>
+  <a href="{% url 'home' %}" class="sw-btn sw-btn-primary">Back home</a>
+</section>
+{% endblock %}

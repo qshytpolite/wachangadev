@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — Stanley Wachanga{% endblock %}
+{% block meta_description %}{{ project.short_description }}{% endblock %}
+
+{% block content %}
+
+<article class="sw-detail animate-up">
+
+  <!-- Back -->
+  <a href="{% url 'projects:list' %}" class="sw-back">&#8592; All work</a>
+
+  <!-- Header -->
+  <div class="sw-detail-header">
+    <div class="sw-project-type">{{ project.get_project_type_display }}</div>
+    <h1 class="sw-detail-title">{{ project.title }}</h1>
+    <div class="sw-detail-tags">
+      {% for tag in project.tags.all %}
+      <a href="{% url 'projects:list' %}?tag={{ tag.name }}" class="sw-mini-tag">{{ tag.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Image -->
+  {% if project.image %}
+  <div class="sw-detail-img">
+    <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+  </div>
+  {% endif %}
+
+  <!-- Body -->
+  <div class="sw-detail-body">
+    <div class="sw-detail-content">
+      {{ project.description|linebreaks }}
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sw-detail-sidebar">
+      {% if project.live_url %}
+      <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="sw-btn sw-btn-primary sw-full-width">
+        Live site &#8599;
+      </a>
+      {% endif %}
+      {% if project.github_url %}
+      <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="sw-btn sw-btn-ghost sw-full-width">
+        GitHub &#8599;
+      </a>
+      {% endif %}
+    </aside>
+  </div>
+
+</article>
+
+<!-- Related projects -->
+{% if related %}
+<section class="sw-section sw-related animate-up delay-2">
+  <div class="sw-section-label">More {{ project.get_project_type_display }} projects</div>
+  <div class="sw-projects-grid">
+    {% for item in related %}
+    <a href="{% url 'projects:detail' item.slug %}" class="sw-project-card">
+      <div class="sw-project-type">{{ item.get_project_type_display }}</div>
+      <div class="sw-project-title">{{ item.title }}</div>
+      <p class="sw-project-desc">{{ item.short_description }}</p>
+      <div class="sw-project-footer">
+        <div class="sw-project-tags">
+          {% for tag in item.tags.all %}
+          <span class="sw-mini-tag">{{ tag.name }}</span>
+          {% endfor %}
+        </div>
+        <span class="sw-arrow">&#8599;</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

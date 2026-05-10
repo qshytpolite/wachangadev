@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Contact — Stanley Wachanga{% endblock %}
+{% block meta_description %}Get in touch with Stanley Wachanga for freelance work, job opportunities or collaborations.{% endblock %}
+
+{% block content %}
+<section class="sw-page-header animate-up">
+  <div class="sw-eyebrow">Get in touch</div>
+  <h1 class="sw-headline-sm">Contact</h1>
+  <p class="sw-sub">Available for freelance projects, full-time roles, and interesting collaborations.</p>
+</section>
+
+<div class="sw-divider"></div>
+
+<section class="sw-contact-wrap animate-up delay-1">
+  <div class="sw-contact-form-col">
+    <form method="post" class="sw-form" novalidate>
+      {% csrf_token %}
+      <div class="sw-form-group">
+        <label class="sw-label" for="id_name">Name</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+        <span class="sw-form-error">{{ form.name.errors.0 }}</span>
+        {% endif %}
+      </div>
+      <div class="sw-form-group">
+        <label class="sw-label" for="id_email">Email</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+        <span class="sw-form-error">{{ form.email.errors.0 }}</span>
+        {% endif %}
+      </div>
+      <div class="sw-form-group">
+        <label class="sw-label" for="id_message">Message</label>
+        {{ form.message }}
+        {% if form.message.errors %}
+        <span class="sw-form-error">{{ form.message.errors.0 }}</span>
+        {% endif %}
+      </div>
+      <button type="submit" class="sw-btn sw-btn-primary">Send message &#8599;</button>
+    </form>
+  </div>
+
+  <aside class="sw-contact-info-col">
+    <div class="sw-contact-block">
+      <div class="sw-section-label">Email</div>
+      <a href="mailto:hello@stanleywachanga.dev" class="sw-contact-link">hello@stanleywachanga.dev</a>
+    </div>
+    <div class="sw-contact-block">
+      <div class="sw-section-label">Elsewhere</div>
+      <a href="https://github.com/stanleywachanga" target="_blank" rel="noopener" class="sw-contact-link">GitHub &#8599;</a>
+      <a href="https://linkedin.com/in/stanleywachanga" target="_blank" rel="noopener" class="sw-contact-link">LinkedIn &#8599;</a>
+    </div>
+    <div class="sw-contact-block">
+      <div class="sw-section-label">Based in</div>
+      <p class="sw-contact-text">Nairobi, Kenya<br/>Open to remote work globally</p>
+    </div>
+  </aside>
+</section>
+{% endblock %}
